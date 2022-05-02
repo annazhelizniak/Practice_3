@@ -7,6 +7,7 @@ using Practice_3.Tools;
 
 namespace Practice_3.Models
 {
+    //model which has all necessary fields and calculations
     class Person
     {
         #region Fields

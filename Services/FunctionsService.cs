@@ -10,6 +10,7 @@ using Practice_3.Tools;
 
 namespace Practice_3.Services
 {
+    //has functions for interactions with storage (save/delete/edit)
     class FunctionsService
     {
         private static FileRepository repository = new FileRepository();

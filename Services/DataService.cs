@@ -8,6 +8,7 @@ using Practice_3.Repositories;
 
 namespace Practice_3.Services
 {
+    //has method that represent all saved users (data)
     class DataService
     {
         private static FileRepository Repository = new FileRepository();
