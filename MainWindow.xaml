@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:Practice_3"
         xmlns:views="clr-namespace:Practice_3.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="420" Width="800" MinHeight="410" MinWidth="300" IsEnabled="{Binding IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+        Title="MainWindow" Height="420" Width="1025" MinHeight="410" MinWidth="800" IsEnabled="{Binding IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
 </Window>

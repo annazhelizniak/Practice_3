@@ -16,14 +16,8 @@ namespace Practice_3.Services
 
         public async Task<bool> AddPerson(Person person)
         {
-            if (repository.GetAsync(person.Guid).Result == null)
-            {
-                await repository.AddOrUpdateAsync(person);
+            await repository.AddOrUpdateAsync(person);
                 return true;
-            }
-
-            if(repository.GetAsync(person.Guid).Result != null) return false;
-            return false;
         }
 
         public async Task<bool> EditPerson(Person person)
