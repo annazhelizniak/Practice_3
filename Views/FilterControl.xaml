@@ -27,8 +27,41 @@
         <DatePicker Grid.Row="1" Grid.Column="2" SelectedDate="{Binding SelectedDate}"  FontSize="13" Margin="5,5,5,2"></DatePicker>
         <Button Grid.Row="2" Grid.Column="1" Content="Filter" FontSize="13" Margin="5,5,5,2" Command="{Binding FilterCommand}"></Button>
         <Button Grid.Row="2" Grid.Column="2" Content="Back" FontSize="13" Margin="5,5,5,2" Command="{Binding GoToDataCommand}"></Button>
-        <DataGrid Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding SelectedPeople}" IsReadOnly="True" CanUserAddRows="False">
-        </DataGrid>
+            <DataGrid Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding SelectedPeople}" SelectedItem="{Binding Path=Current}" CanUserAddRows="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                    <DataGridTextColumn Header="User ID" Binding="{Binding Guid}" IsReadOnly="True"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Surname" Binding="{Binding Surname, UpdateSourceTrigger=LostFocus}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email, UpdateSourceTrigger=LostFocus}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Date of birth">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+                        </DataTemplate>
+
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Is adult" Binding="{Binding IsAdultString}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Is birthday" Binding="{Binding IsBirthdayString}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Sun Sign" Binding="{Binding SunSign}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Chinese Sign" Binding="{Binding ChineseSign}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete" Command="{Binding Path=DataContext.DeletePersonCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit" Command="{Binding Path=DataContext.EditPersonCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         
     </Grid>
     </ScrollViewer>

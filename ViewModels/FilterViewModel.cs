@@ -27,9 +27,14 @@ namespace Practice_3.ViewModels
         private DateTime _seleDateTime;
 
         private DataService _dataService;
+        private FunctionsService _functionsService;
 
         private RelayCommand<object> _goToDataCommand;
         private RelayCommand<object> _filterCommand;
+        private RelayCommand<object> _deletePersonCommand;
+        private RelayCommand<object> _editPersonCommand;
+
+        private Person _current;
 
 
 
@@ -48,6 +53,7 @@ namespace Practice_3.ViewModels
             _columns.Add("Chinese sign");
 
             _dataService = new DataService();
+            _functionsService = new FunctionsService();
             _allPeople = new ObservableCollection<Person>(_dataService.GetAllUsers());
 
 
@@ -60,6 +66,17 @@ namespace Practice_3.ViewModels
                 return _columns;
             }
 
+        }
+        public Person Current
+        {
+            get
+            { return _current; }
+            set
+            {
+                if (_current == value) return;
+                _current = value;
+                OnPropertyChanged();
+            }
         }
 
         public string SelectedColumn
@@ -207,6 +224,39 @@ namespace Practice_3.ViewModels
                     SelectedPeople = new ObservableCollection<Person>(list);
                     MessageBox.Show($"Відфільтровано за катеогорією Chinese sign {ValueForSearch}");
                     break;
+            }
+        }
+        public RelayCommand<object> DeletePersonCommand
+        {
+            get
+            {
+                return _deletePersonCommand ??= new RelayCommand<object>(_ => DeletePerson());
+            }
+        }
+        public RelayCommand<object> EditPersonCommand
+        {
+            get
+            {
+                return _editPersonCommand ??= new RelayCommand<object>(_ => EditPerson());
+            }
+        }
+
+        private async void DeletePerson()
+        {
+            await Task.Run(() => _functionsService.DeletePerson(Current));
+            _allPeople.Remove(Current);
+            SelectedPeople.Remove(Current);
+            MessageBox.Show("Людину успішно видалено");
+
+        }
+        private async void EditPerson()
+        {
+            if (!Current.IsValid()) MessageBox.Show("Некоректна дата народження");
+            else if (!Current.CorrectEmail()) MessageBox.Show("Некоректна електронна адреса");
+            else
+            {
+                await Task.Run(() => _functionsService.EditPerson(Current));
+                MessageBox.Show("Людину успішно відредаговано");
             }
         }
 

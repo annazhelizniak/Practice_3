@@ -17,12 +17,14 @@ namespace Practice_3.Repositories
             if (!Directory.Exists(BaseFolder))
                 Directory.CreateDirectory(BaseFolder);
 
-            foreach (Person person in _defaultData)
+            if (!File.Exists(Path.Combine(BaseFolder, _defaultData[0].Guid.ToString())) &&
+                !File.Exists(Path.Combine(BaseFolder, _defaultData[1].Guid.ToString())))
             {
-                string filePath = Path.Combine(BaseFolder, person.Guid.ToString());
-
-                if (!File.Exists(filePath))
-                    _ = AddOrUpdateAsync(person);
+                foreach (Person person in _defaultData)
+                {
+                    if (!File.Exists(Path.Combine(BaseFolder, person.Guid.ToString())))
+                        _ = AddOrUpdateAsync(person);
+                }
             }
         }
 

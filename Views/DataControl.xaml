@@ -21,8 +21,8 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="User ID" Binding="{Binding Guid}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Surname" Binding="{Binding Surname, UpdateSourceTrigger=LostFocus}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email, UpdateSourceTrigger=LostFocus}"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Date of birth">
                     <DataGridTemplateColumn.CellTemplate>

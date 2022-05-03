@@ -46,7 +46,9 @@ namespace Practice_3.ViewModels
         public Person Current
         {
             get
-            { return _current; }
+            {
+                return _current;
+            }
             set
             {
                 if (_current == value) return;
@@ -110,8 +112,8 @@ namespace Practice_3.ViewModels
         }
         private async void EditPerson()
         {
-            if (!_current.IsValid()) MessageBox.Show("Некоректна дата народження");
-            else if (!_current.CorrectEmail()) MessageBox.Show("Некоректна електронна адреса");
+            if (!Current.IsValid()) MessageBox.Show("Некоректна дата народження");
+            else if (!Current.CorrectEmail()) MessageBox.Show("Некоректна електронна адреса");
             else
             {
                 await Task.Run(() => _functionsService.EditPerson(Current));
