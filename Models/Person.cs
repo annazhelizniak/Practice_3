@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Practice_3.Tools;
@@ -220,8 +221,16 @@ namespace Practice_3.Models
 
         public bool CorrectEmail()
         {
-            if (_email.EndsWith("@gmail.com")) return true;
-            return false;
+            try
+            {
+                MailAddress ma = new MailAddress(_email);
+            }
+            catch (FormatException exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         #endregion
